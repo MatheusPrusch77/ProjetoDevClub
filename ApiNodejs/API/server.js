@@ -1,11 +1,12 @@
 import express from  'express'
 import { PrismaClient } from '@prisma/client'
+import cors from 'cors'
 
 const prisma = new PrismaClient()
 
 const app = express()
 app.use(express.json()) // avisa o express que será utilizado  o formato json
-
+app.use(cors()) //em ambiente empresarial, necessario configurar a rota correta dentro do cors para evitar qualquer tipo de acesso
 app.post('/users', async (req, res) => { //async
     
    await prisma.user.create ({ // sempre que utiliz o await, que serve para o js "esperar", precisa usar um async
